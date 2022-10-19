@@ -21,4 +21,6 @@ class User < ApplicationRecord
   KANA_NAME_REGEX = /\A[ァ-ヶー－]+\z/.freeze
   validates_format_of [:last_name_kana, :first_name_kana], with: KANA_NAME_REGEX,
                                                            message: 'is invalid. Input full-width katakana characters'
+
+  has_many :items
 end
