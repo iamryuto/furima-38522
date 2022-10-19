@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -18,7 +19,9 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
-    params.require(:item).permit(:item_name, :image, :explanation, :price, :category_id, :state_id, :fee_id, :prefecture_id, :day_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_name, :image, :explanation, :price, :category_id, :state_id, :fee_id, :prefecture_id,
+                                 :day_id).merge(user_id: current_user.id)
   end
 end
