@@ -5,9 +5,9 @@ function price (){
     const commissionValue = Math.floor(inputValue / 10);
     const profitValue = inputValue - commissionValue;
     const addTaxDom = document.getElementById("add-tax-price");
-    addTaxDom.innerHTML = `${commissionValue}`
+    addTaxDom.innerHTML = `${commissionValue}`;
     const addProfitDom = document.getElementById("profit");
-    addProfitDom.innerHTML = `${profitValue}`
+    addProfitDom.innerHTML = `${profitValue}`;
   })
 };
 
