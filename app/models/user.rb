@@ -23,4 +23,5 @@ class User < ApplicationRecord
                                                            message: 'is invalid. Input full-width katakana characters'
 
   has_many :items
+  has_many :orders
 end
