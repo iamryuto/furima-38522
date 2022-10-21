@@ -32,7 +32,7 @@
 | category_id   | integer    | null: false                    |
 | state_id      | integer    | null: false                    |
 | fee_id        | integer    | null: false                    |
-| day_id       | integer    | null: false                    |
+| day_id        | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
 ### Association
@@ -65,7 +65,7 @@
 | phone_number  | string     | null: false                    |
 | building      | string     |                                |
 | prefecture_id | integer    | null: false                    |
-| order         | references | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
