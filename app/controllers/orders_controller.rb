@@ -1,9 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
+  before_action :move_to_root 
+  before_action :cannot_purchase
 
   def index
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -27,5 +29,17 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order_address).permit(:zip, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_root
+    redirect_to root_path if user_signed_in? && current_user.id != @item.user_id && @item.order.present?
+  end
+
+  def cannot_purchase
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id
   end
 end

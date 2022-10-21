@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :update, :edit, :destroy]
-  before_action :move_to_index, only: [:edit, :destroy]
+  before_action :move_to_root, only: [:edit, :destroy]
+  before_action :cannot_edit, only: [:edit] 
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -52,7 +53,11 @@ class ItemsController < ApplicationController
                                  :day_id).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def move_to_root
     redirect_to root_path if user_signed_in? && current_user.id != @item.user_id
+  end
+
+  def cannot_edit
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id && @item.order.present?
   end
 end
