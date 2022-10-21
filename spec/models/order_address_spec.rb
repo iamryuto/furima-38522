@@ -41,7 +41,8 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが空で購入できない' do
         @order_address.phone_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number can't be blank", "Phone number is invalid. Input only number")
+        expect(@order_address.errors.full_messages).to include("Phone number can't be blank",
+                                                               'Phone number is invalid. Input only number')
       end
       it 'prefecture_idが空(id: 1, name: "---")で購入できない' do
         @order_address.prefecture_id = 1
